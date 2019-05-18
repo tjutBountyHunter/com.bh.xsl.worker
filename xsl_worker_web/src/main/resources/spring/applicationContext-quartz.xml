@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 配置包扫描器 -->
+    <context:component-scan base-package="quartz"/>
+
+
+
+
+    <!--配置定时任务-->
+    <bean id="calcelTaskJob" class="quartz.CalcelTaskJob"></bean>
+    <!--配置Job-->
+    <bean id="taskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="calcelTaskJob"></property>
+        <property name="targetMethod" value="execute"></property>
+    </bean>
+    <!--配置触发器Trigger-->
+    <bean id="taskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="taskJob"></property>
+        <property name="cronExpression" value="0/10 * * * * ?"></property>
+    </bean>
+    <!--配置调度器（整合多个触发器）-->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list><ref bean="taskTrigger"/></list>
+        </property>
+    </bean>
+</beans>

@@ -1,4 +1,3 @@
-import org.junit.Test;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
@@ -26,4 +25,6 @@ public class TestQuartz implements Job {
         scheduler.scheduleJob(jobDetail,trigger);
 
     }
+
+
 }
