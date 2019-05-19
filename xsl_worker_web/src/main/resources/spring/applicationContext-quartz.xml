@@ -18,9 +18,14 @@
 
     <!--配置定时任务-->
     <bean id="calcelTaskJob" class="quartz.CalcelTaskJob"></bean>
+    <bean id="generateAccount" class="quartz.GenerateJob"></bean>
     <!--配置Job-->
     <bean id="taskJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="calcelTaskJob"></property>
+        <property name="targetMethod" value="execute"></property>
+    </bean>
+    <bean id="generateJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="generateAccount"></property>
         <property name="targetMethod" value="execute"></property>
     </bean>
     <!--配置触发器Trigger-->
@@ -28,10 +33,18 @@
         <property name="jobDetail" ref="taskJob"></property>
         <property name="cronExpression" value="0 0/1 * * * ?"></property>
     </bean>
+    <bean id="generateTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="generateJob"></property>
+        <property name="cronExpression" value="0/10 * * * * ?"></property>
+    </bean>
     <!--配置调度器（整合多个触发器）-->
     <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
-            <list><ref bean="taskTrigger"/></list>
+            <list>
+                <ref bean="taskTrigger"/>
+                <ref bean="generateTaskTrigger"/>
+            </list>
         </property>
     </bean>
+
 </beans>
