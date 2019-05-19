@@ -13,6 +13,7 @@ import util.GsonSingle;
 import util.UUIDUtil;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 @Service
 public class GenerateAccountImpl implements GenerateAccount {
@@ -32,11 +33,11 @@ private XslAccountMapper xslAccountMapper;
            XslAccount xslAccount=new XslAccount();
            XslAccount old=xslAccountMapper.selectLastOne();
            int totalTask=taskInfoResource.totalTask();
-           int totalMoney=taskInfoResource.totalMoney();
+           BigDecimal totalMoney=taskInfoResource.totalMoney();
            int totalDoneTask=taskInfoResource.totalDoneTask();
            int totalUser=userInfoResouce.getUserNums();
            int oldtotalTask=old.getTotalTask();
-           float oldtotalMoney=old.getTotalMoney();
+           BigDecimal oldtotalMoney=old.getTotalMoney();
            int oldtotalDoneTask=old.getTotalDoneTask();
            int oldtotalUser=old.getTotalUser();
            xslAccount.setTotalUser(totalUser);
@@ -49,7 +50,7 @@ private XslAccountMapper xslAccountMapper;
            xslAccount.setNewDoneTask(totalDoneTask-oldtotalDoneTask);
 
            xslAccount.setTotalMoney(totalMoney);
-           xslAccount.setNewMoney(totalMoney-oldtotalMoney);
+           xslAccount.setNewMoney(totalMoney.subtract(oldtotalMoney));
 
            xslAccount.setAccountId(UUIDUtil.getUUID());
            xslAccountMapper.insert(xslAccount);

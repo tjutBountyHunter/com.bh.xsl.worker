@@ -1,5 +1,7 @@
 package pojo;
 
+import java.math.BigDecimal;
+
 public class XslAccount {
     String accountId;
     private int totalUser;
@@ -8,8 +10,8 @@ public class XslAccount {
     private int newTask;
     private int totalDoneTask;
     private int newDoneTask;
-    private float totalMoney;
-    private float newMoney;
+    private BigDecimal totalMoney;
+    private BigDecimal newMoney;
 
     public String getAccountId() {
         return accountId;
@@ -67,19 +69,19 @@ public class XslAccount {
         this.newDoneTask = newDoneTask;
     }
 
-    public float getTotalMoney() {
+    public BigDecimal getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(float totalMoney) {
+    public void setTotalMoney(BigDecimal totalMoney) {
         this.totalMoney = totalMoney;
     }
 
-    public float getNewMoney() {
+    public BigDecimal getNewMoney() {
         return newMoney;
     }
 
-    public void setNewMoney(float newMoney) {
+    public void setNewMoney(BigDecimal newMoney) {
         this.newMoney = newMoney;
     }
 }
