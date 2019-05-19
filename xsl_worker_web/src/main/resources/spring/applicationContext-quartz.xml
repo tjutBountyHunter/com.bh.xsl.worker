@@ -35,7 +35,7 @@
     </bean>
     <bean id="generateTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="generateJob"></property>
-        <property name="cronExpression" value="0/10 * * * * ?"></property>
+        <property name="cronExpression" value="0 0 24 * * ?"></property>
     </bean>
     <!--配置调度器（整合多个触发器）-->
     <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
