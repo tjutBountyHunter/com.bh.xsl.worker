@@ -2,17 +2,22 @@ package service.impl;
 
 import com.xsl.user.UserInfoResouce;
 import mapper.XslAccountMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.XslAccount;
+import quartz.CalcelTaskJob;
 import resource.TaskInfoResource;
 import service.GenerateAccount;
+import util.GsonSingle;
 import util.UUIDUtil;
 
 import javax.annotation.Resource;
 
 @Service
 public class GenerateAccountImpl implements GenerateAccount {
+    private static final Logger log = LoggerFactory.getLogger(GenerateAccountImpl.class);
 
 @Resource
 private TaskInfoResource taskInfoResource;
@@ -49,6 +54,8 @@ private XslAccountMapper xslAccountMapper;
 
            xslAccount.setAccountId(UUIDUtil.getUUID());
            xslAccountMapper.insert(xslAccount);
+           log.info("the Task cancel :{}", GsonSingle.getGson().toJson(xslAccount));
+
 
        }catch (Exception e){
            throw new RuntimeException(e);

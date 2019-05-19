@@ -7,7 +7,6 @@ public class GenerateJob {
     @Autowired
     private  GenerateAccount generateAccount;
     public  void execute(){
-        System.out.println(555555);
         generateAccount.generateAccount();
     }
 }
