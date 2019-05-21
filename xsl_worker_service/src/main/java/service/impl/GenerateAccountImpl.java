@@ -36,10 +36,16 @@ private XslAccountMapper xslAccountMapper;
            BigDecimal totalMoney=taskInfoResource.totalMoney();
            int totalDoneTask=taskInfoResource.totalDoneTask();
            int totalUser=userInfoResouce.getUserNums();
-           int oldtotalTask=old.getTotalTask();
-           BigDecimal oldtotalMoney=old.getTotalMoney();
-           int oldtotalDoneTask=old.getTotalDoneTask();
-           int oldtotalUser=old.getTotalUser();
+           int oldtotalTask=0;
+           BigDecimal oldtotalMoney =new BigDecimal(0);
+           int oldtotalDoneTask=0;
+           int oldtotalUser=0;
+          if(old!=null){
+           oldtotalTask=old.getTotalTask();
+           oldtotalMoney=old.getTotalMoney();
+           oldtotalDoneTask=old.getTotalDoneTask();
+           oldtotalUser=old.getTotalUser();
+          }
            xslAccount.setTotalUser(totalUser);
            xslAccount.setNewUser(totalUser-oldtotalUser);
 
