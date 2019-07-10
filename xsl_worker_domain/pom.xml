@@ -2,19 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>xsl_worker</artifactId>
-        <groupId>com.bh.xsl.worker</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.bh.xsl.worker</groupId>
     <artifactId>xsl_worker_domain</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <parent>
+        <groupId>com.bh.xsl.worker</groupId>
+        <artifactId>xsl_work</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <dependencies>
         <dependency>
             <groupId>com.bh.xsl.worker</groupId>
             <artifactId>xsl_worker_common</artifactId>
         </dependency>
     </dependencies>
-
 </project>
